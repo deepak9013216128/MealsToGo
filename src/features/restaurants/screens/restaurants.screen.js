@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import styled from "styled-components/native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 
@@ -21,7 +21,7 @@ const LoadingContainer = styled.View`
 `;
 
 export const RestaurentsScreen = () => {
-	const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+	const { restaurants, isLoading } = useContext(RestaurantsContext);
 
 	return (
 		<SafeArea>

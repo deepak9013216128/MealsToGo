@@ -1,0 +1,31 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:jsx-a11y/recommended"
+	],
+	"plugins": ["react", "jsx-a11y"],
+	"rules": {
+		"react/prop-types": 0,
+		"indent": [2, 2, "tab"],
+		"linebreak-style": 1,
+		"quotes": ["error", "double"]
+	},
+	"parserOptions": {
+		"ecmaVersion": 2021,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"env": {
+		"es6": true,
+		"browser": true,
+		"node": true
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
+}
