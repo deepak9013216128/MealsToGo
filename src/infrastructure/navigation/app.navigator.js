@@ -1,54 +1,54 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Text, View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { Text } from "react-native";
 
-import { RestaurentsScreen } from "../../features/restaurants/screens/restaurants.screen";
+import { SafeArea } from "../../components/utility/safe-area.component";
 
-function MapScreen() {
-	return (
-		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-			<Text>Map!</Text>
-		</View>
-	);
-}
-
-function SettingsScreen() {
-	return (
-		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-			<Text>Settings!</Text>
-		</View>
-	);
-}
+import { RestaurantsNavigator } from "./restaurants.navigator";
 
 const Tab = createBottomTabNavigator();
 
-const TAB_ICONS = {
-	Restaurants: "restaurant",
-	Map: "map",
-	Settings: "settings",
+const TAB_ICON = {
+	Restaurants: "md-restaurant",
+	Map: "md-map",
+	Settings: "md-settings",
 };
 
+const Settings = () => (
+	<SafeArea>
+		<Text>Settings</Text>
+	</SafeArea>
+);
+const Map = () => (
+	<SafeArea>
+		<Text>Map</Text>
+	</SafeArea>
+);
+
 const createScreenOptions = ({ route }) => {
-	const iconName = TAB_ICONS[route.name];
+	const iconName = TAB_ICON[route.name];
 	return {
-		tabBarIcon: ({ color, size }) => {
-			return <Ionicons name={iconName} size={size} color={color} />;
-		},
-		tabBarActiveTintColor: "tomato",
-		tabBarInactiveTintColor: "gray",
+		tabBarIcon: ({ size, color }) => (
+			<Ionicons name={iconName} size={size} color={color} />
+		),
+		headerShown: false,
 	};
 };
 
-export const AppNavigator = () => {
-	return (
-		<NavigationContainer>
-			<Tab.Navigator screenOptions={createScreenOptions}>
-				<Tab.Screen name="Restaurants" component={RestaurentsScreen} />
-				<Tab.Screen name="Map" component={MapScreen} />
-				<Tab.Screen name="Settings" component={SettingsScreen} />
-			</Tab.Navigator>
-		</NavigationContainer>
-	);
-};
+export const AppNavigator = () => (
+	<NavigationContainer>
+		<Tab.Navigator
+			screenOptions={createScreenOptions}
+			tabBarOptions={{
+				activeTintColor: "tomato",
+				inactiveTintColor: "gray",
+			}}
+		>
+			<Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+			<Tab.Screen name="Map" component={Map} />
+			<Tab.Screen name="Settings" component={Settings} />
+		</Tab.Navigator>
+	</NavigationContainer>
+);
